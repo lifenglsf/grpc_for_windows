@@ -5,5 +5,10 @@
 
 # 版本日志
 - 2020.1.14 grpc 1.26,protoc 3.11.2
+
+# 使用方法
+参考[protocbuf使用](https://developers.google.com/protocol-buffers/docs/proto3#generating)
+
+可以把exe的目录添加到系统的path变量下
     
      
