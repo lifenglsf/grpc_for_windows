@@ -9,7 +9,7 @@
 - 2020.6.12 grpc 1.28.1 protoc 3.12.0
 
 # 使用方法
-###生成php文件的参考命令
+### 生成php文件的参考命令
 
 `protoc.exe --proto_path=. --php_out=. --grpc_out=. --plugin=protoc-gen-grpc=grpc_php_plugin.exe helloworld.proto`
 
