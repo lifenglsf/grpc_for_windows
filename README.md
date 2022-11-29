@@ -1,6 +1,9 @@
 # 这是一个grpc+protobuf的windows版本
 项目使用 [vcpkg](https://github.com/microsoft/vcpkg)编译，仅供大家测试使用，请勿用于正式环境
 
+### 安装命令
+使用 `vcpkg install grpc`  进行grpc安装，本地测试会自动安装x86和x64版本的grpc和protoc，grpc的exe在vcpkg项目的下的installed/x86-windows/tools/grpc和installed/x64-windows/tools/grpc目录下，protoc的exe在vcpkg项目的下的installed/x86-windows/tools/protobuf和installed/x64-windows/tools/protobuf目录下
+
 
 朋友需要在windows下进行php+grpc的相关开发，然后发现官方的grpc未提供windows下的php plugin的exe文件，故建立此项目，希望能够帮助更多的以windows为开发环境的开发者。 
 
