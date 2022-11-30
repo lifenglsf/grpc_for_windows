@@ -10,10 +10,14 @@
 - 安装grpc 
 	vcpkg install grpc
 - x86文件位置
+
 	installed\x86-windows\tools\protobuf
+	
 	installed\x86-windows\tools\grpc
 - x64文件位置
+
 	installed\x64-windows\tools\protobuf
+	
 	installed\x64-windows\tools\grpc
 
 
@@ -35,12 +39,15 @@
     
 # 特别说明
 -  使用vcpkg 2022-11-10-5fdee72bc1fceca198fb1ab7589837206a8b81ba这个版本安装grpc会出现安装x86的grpc，安装完成后出现类似
-`grpc provides CMake targets:
-    # this is heuristically generated, and may not be correct
-    find_package(gRPC CONFIG REQUIRED)
-    # note: 7 additional targets are not displayed.
-    target_link_libraries(main PRIVATE gRPC::gpr gRPC::grpc gRPC::grpc++ gRPC::grpc++_alts)
-    find_package(modules CONFIG REQUIRED)
-    target_link_libraries(main PRIVATE re2::re2 c-ares::cares)`
-  这样的错误，然后发现grpc的plugin都没有生成，发现grpc少了个grpc[codegen]这个工具没有自动安装，安装这个工具即可`vcpkg install grpc[codegen]:x86-windows --recurse`这个命令会重新安装grpc
+
+```grpc provides CMake targets:
+# this is heuristically generated, and may not be correct
+find_package(gRPC CONFIG REQUIRED)
+# note: 7 additional targets are not displayed.
+target_link_libraries(main PRIVATE gRPC::gpr gRPC::grpc gRPC::grpc++ gRPC::grpc++_alts)
+find_package(modules CONFIG REQUIRED)
+target_link_libraries(main PRIVATE re2::re2 c-ares::cares)
+```
+
+这样的错误，然后发现grpc的plugin都没有生成，发现grpc少了个grpc[codegen]这个工具没有自动安装，安装这个工具即可`vcpkg install grpc[codegen]:x86-windows --recurse`这个命令会重新安装grpc
   - 正常情况grpc目录下的libprotobuf.dll,libprotoc.dll和protobuf目录下的应该是一样的，但是vcpkg 2022-11-10-5fdee72bc1fceca198fb1ab7589837206a8b81ba 安装的会不一致，需要使用protobuf下的dll文件，否则protoc生成proto程序文件会失败
