@@ -20,13 +20,20 @@
 	
 	installed\x64-windows\tools\grpc
 
+### 说明
+- vcpkg install grpc 会自动安装x64和x86版本的grpc
+- 本地安装发现x86版本的tools/grpc目录下的libprotobuf.dll和libprotoc.dll和tools/protobuf下的libprotobuf.dll和libprotoc.dll 大小不一致
+- 建议x86和x64的分开安装，
+	- 安装x86版本vcpkg install grpc:x86-windows grpc[codegen]:x86-windows --host-triplet=x86-windows
+	- 安装x64版本vcpkg install grpc:x64-windows grpc[codegen]:x64-windows --host-triplet=x64-windows
 
-
+- 如果没有生成grpc的plugin是因为没有安装grpc[codegen],可以按需安装，本地安装发现x64会自动安装grpc plugin,x86需要指定安装grpc['codegen']:x86-windows
 
 # 版本日志
 - 2020.1.14 grpc 1.26,protoc 3.11.2
 - 2020.6.12 grpc 1.28.1 protoc 3.12.0
 - 2022.11.30 grpc 1.50.1 protoc 3.21.8
+- 2023.02.09 grpc 1.51.1 protoc 3.21.12
 
 # 使用方法
 ### 生成php文件的参考命令
@@ -40,7 +47,8 @@
 # 特别说明
 -  使用vcpkg 2022-11-10-5fdee72bc1fceca198fb1ab7589837206a8b81ba这个版本安装grpc会出现安装x86的grpc，安装完成后出现类似
 
-```grpc provides CMake targets:
+```
+grpc provides CMake targets:
 # this is heuristically generated, and may not be correct
 find_package(gRPC CONFIG REQUIRED)
 # note: 7 additional targets are not displayed.
@@ -49,5 +57,4 @@ find_package(modules CONFIG REQUIRED)
 target_link_libraries(main PRIVATE re2::re2 c-ares::cares)
 ```
 
-这样的错误，然后发现grpc的plugin都没有生成，发现grpc少了个grpc[codegen]这个工具没有自动安装，安装这个工具即可`vcpkg install grpc[codegen]:x86-windows --recurse`这个命令会重新安装grpc
-  - 正常情况grpc目录下的libprotobuf.dll,libprotoc.dll和protobuf目录下的应该是一样的，但是vcpkg 2022-11-10-5fdee72bc1fceca198fb1ab7589837206a8b81ba 安装的会不一致，需要使用protobuf下的dll文件，否则protoc生成proto程序文件会失败
+这样的错误可以忽略
